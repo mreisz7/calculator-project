@@ -1,0 +1,158 @@
+$background:      #424242;
+$calculator:      #FFFFFF;
+$screen:          #DFE8E8;
+$screen-text:     #2B2B2B;
+$solar-cell:      #2B2B2B;
+$button:          #555555;
+$button-text:     #FFFFFF;
+$red-button:      #FF2E00;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Arial", sans-serif, monospace;
+  background-color: $background;
+  font-size: 15px;
+}
+
+#calculator {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 42rem;
+  max-height: 98vh;
+  width: 25rem;
+  max-width: 98vw;
+  background-color: $calculator;
+  border-radius: 1rem;
+  padding: 2rem 1rem 1rem;
+  box-shadow: 0 2px 2px 10px #AAA;
+
+  #screen {
+    display: flex;
+    flex-flow: column nowrap;
+    height: 20%;
+    background-color: $screen;
+    color: $screen-text;
+    border: 1px solid $screen-text;
+    border-radius: 1rem;
+    padding: .5rem 1rem;
+    text-align: right;
+
+    #equation {
+      flex: 1;
+    }
+
+    #results {
+      flex: none;
+      font-size: 3em;
+      margin: 0;
+    }
+  }
+
+  #branding-container {
+    display: flex;
+    flex-flox: row nowrap;
+    height: 10%;
+    padding: .5rem;
+
+    #branding {
+      flex: none;
+      height: 100%;
+      width: 42%;
+      padding: .5rem;
+
+      #logo {
+        height: 100%;
+        width: auto;
+      }
+    }
+
+    #solar-cells {
+      display: flex;
+      flex-flow: row nowrap;
+      flex: 1;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      padding: .5rem;
+
+      .solar-cell {
+        flex: 1;
+        height: 100%;
+        background-color: $solar-cell;
+        border: 1px solid darken($solar-cell, 50%);
+      }
+    }
+  }
+
+  #button-container {
+    display: flex;
+    flex-flow: column nowrap;
+    height: 70%;
+
+    .button-row {
+      display: flex;
+      flex-flow: row nowrap;
+      padding: .5rem 0;
+
+      .button-row-3 {
+        flex: 3;
+      }
+
+      .plus-container {
+        flex: 1;
+        padding: .5rem 0;
+      }
+
+      &.single {
+        flex: 1 0 20%;
+      }
+
+      &.double {
+        flex: 2 0 40%;
+        padding: 0;
+      }
+
+      .button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        height: 100%;
+        border: 1px solid black;
+        border-radius: 1rem;
+        margin: 0 .5rem;
+        background-color: $button;
+        color: $button-text;
+        font-size: 2rem;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 3px #000;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+         -khtml-user-select: none;
+           -moz-user-select: none;
+            -ms-user-select: none;
+                user-select: none;
+
+        &:active {
+          box-shadow: 0 1px #000;
+          transform: translateY(2px);
+        }
+
+        &.red {
+          background-color: $red-button;
+        }
+      }
+
+      .three-wide {
+        height: 50%;
+      }
+    }
+
+  }
+}

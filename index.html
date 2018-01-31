@@ -1,0 +1,82 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>MReisz.com - Calculator</title>
+  <meta name="description" content="Calculator">
+  <meta name="author" content="Michael Reisz">
+
+  <link rel="stylesheet" href="./assets/css/calculator.min.css">
+</head>
+<body>
+  <div id="calculator">
+    <div id="screen">
+      <div id="equation">
+        <p>41,999,999 + 1</p>
+      </div>
+      <h1 id="results">
+        42,000,000
+      </h1>
+    </div>
+    <div id="branding-container">
+      <div id="branding">
+        <a href="http://www.mreisz.com/" target="_blank">
+          <img id="logo" src="./assets/img/mrlogo.png" />
+        </a>
+      </div>
+      <div id="solar-cells">
+        <div class="solar-cell"></div>
+        <div class="solar-cell"></div>
+        <div class="solar-cell"></div>
+        <div class="solar-cell"></div>
+        <div class="solar-cell"></div>
+      </div>
+    </div>
+    <div id="button-container">
+      <div class="button-row single">
+        <div id="button-ac" class="button red" data-button-type="event"><span>AC</span></div>
+        <div id="button-c" class="button red" data-button-type="event"><span>C</span></div>
+        <div id="button-percent" class="button" data-button-type="operator"><span>%</span></div>
+        <div id="button-divide" class="button" data-button-type="operator"><span>÷</span></div>
+      </div>
+      <div class="button-row single">
+        <div id="button-7" class="button" data-button-type="value"><span>7</span></div>
+        <div id="button-8" class="button" data-button-type="value"><span>8</span></div>
+        <div id="button-9" class="button" data-button-type="value"><span>9</span></div>
+        <div id="button-multiply" class="button" data-button-type="operator"><span>x</span></div>
+      </div>
+      <div class="button-row single">
+        <div id="button-4" class="button" data-button-type="value"><span>4</span></div>
+        <div id="button-5" class="button" data-button-type="value"><span>5</span></div>
+        <div id="button-6" class="button" data-button-type="value"><span>6</span></div>
+        <div id="button-minus" class="button" data-button-type="operator"><span>-</span></div>
+      </div>
+      <div class="button-row double">
+        <div class="button-row-3">
+          <div class="button-row three-wide">
+            <div id="button-1" class="button" data-button-type="value"><span>1</span></div>
+            <div id="button-2" class="button" data-button-type="value"><span>2</span></div>
+            <div id="button-3" class="button" data-button-type="value"><span>3</span></div>
+          </div>
+          <div class="button-row three-wide">
+            <div id="button-0" class="button" data-button-type="value"><span>0</span></div>
+            <div id="button-decimal" class="button" data-button-type="value"><span>.</span></div>
+            <div id="button-equals" class="button" data-button-type="event"><span>=</span></div>
+          </div>
+        </div>
+        <div class="plus-container">
+          <div id="button-plus" class="button" data-button-type="operator"><span>+</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+	   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+		 crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.20.1/math.min.js"></script>
+  <script src="assets/js/calculator.js"></script>
+</body>
+</html>
