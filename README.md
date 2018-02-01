@@ -1,2 +1,2 @@
 # calculator-project
-A FreeCodeCamp calculator project
+https://mreisz7.github.io/calculator-project/
