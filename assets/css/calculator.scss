@@ -1,9 +1,9 @@
-$background:      #424242;
-$calculator:      #FFFFFF;
+$background:      #000000;
+$calculator:      #B3B3B3;
 $screen:          #DFE8E8;
 $screen-text:     #2B2B2B;
 $solar-cell:      #2B2B2B;
-$button:          #555555;
+$button:          #000000;
 $button-text:     #FFFFFF;
 $red-button:      #FF2E00;
 
@@ -26,10 +26,10 @@ body {
   max-height: 98vh;
   width: 25rem;
   max-width: 98vw;
-  background-color: $calculator;
+  background: linear-gradient(to bottom, $calculator, lighten($calculator, 30%), $calculator);
   border-radius: 1rem;
   padding: 2rem 1rem 1rem;
-  box-shadow: 0 2px 2px 10px #AAA;
+  box-shadow: 0 2px 3px 10px #AAA;
 
   #screen {
     display: flex;
@@ -50,6 +50,7 @@ body {
       flex: none;
       font-size: 3em;
       margin: 0;
+      overflow-x: auto;
     }
   }
 
@@ -126,7 +127,8 @@ body {
         border: 1px solid black;
         border-radius: 1rem;
         margin: 0 .5rem;
-        background-color: $button;
+        background: radial-gradient(lighten($button, 20%), $button);
+        // background-color: $button;
         color: $button-text;
         font-size: 2rem;
         font-weight: bold;
@@ -145,7 +147,8 @@ body {
         }
 
         &.red {
-          background-color: $red-button;
+          background: radial-gradient(lighten($red-button, 15%), $red-button);
+          // background-color: $red-button;
         }
       }
 

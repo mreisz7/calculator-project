@@ -1,7 +1,15 @@
 var equationArray = [];
-var currentValue;
+var currentValue = "";
+var lastInteraction = "";
 
 $(document).ready(function() {
+
+  // Prevent the quick find from appearing in Firefox
+  $(document).on('keydown', function(event) {
+    if (event.keyCode===191 || event.keyCode===111) {
+        event.preventDefault();
+    }
+  });
 
   // Map the keyboard events that correspond with calculator keys
   document.addEventListener('keydown', function(event) {
@@ -88,18 +96,68 @@ $(document).ready(function() {
   });
 
   // Map click events to the value buttons
-  $('.button[data-button-type="value"]').on('click', function() {
-    console.log($(this).find('span').text() + ' (value)');
+  $('.button[data-button-type="value"]:not(#button-negative)').on('click', function() {
+    var value = $(this).find('span').text()
+    if (lastInteraction == 'equals') {
+      equationArray = [];
+      $('#equation').text(equationArray.join(' '));
+    }
+    lastInteraction = "value";
+    currentValue = currentValue.toString().concat(value);
+    $('#results').text(currentValue);
+  });
+
+  // Map a click event the negative/positive toggle
+  $('#button-negative').on('click', function() {
+    console.log(currentValue[0]);
+    if (currentValue[0] == '-') {
+      currentValue = currentValue.replace('-', '');
+    } else {
+      currentValue = '-'.concat(currentValue);
+    }
+    $('#results').text(currentValue);
   });
 
   // Map click events to the operator buttons
   $('.button[data-button-type="operator"]').on('click', function() {
-    console.log($(this).find('span').text() + ' (operator)');
+    if (lastInteraction != '') {
+      operator = $(this).find('span').text();
+      if (lastInteraction == 'operator') {
+        equationArray[equationArray.length - 1] = operator;
+      } else {
+        equationArray.push(currentValue);
+        currentValue = '';
+        $('#results').text(currentValue);
+        equationArray.push(operator);
+      }
+      lastInteraction = 'operator';
+      $('#equation').text(equationArray.join(' '));
+    }
   });
 
-  // Map click events to the event buttons
-  $('.button[data-button-type="event"]').on('click', function() {
-    console.log($(this).find('span').text() + ' (event)');
+  // Map click events to the equals buttons
+  $('#button-equals').on('click', function() {
+    equationArray.push(currentValue);
+    $('#equation').text(equationArray.join(' ').concat(' ='));
+    currentValue = '';
+    var result = math.eval(equationArray.join(' ').replace('÷', '/').replace('x', '*'));
+    equationArray = [result];
+    currentValue = '';
+    $('#results').text(result);
+    lastInteraction = 'equals';
+  });
+
+  // Map click event to the AC button
+  $('#button-ac').on('click', function() {
+    equationArray = [];
+    $('#equation').text(equationArray.join(' '));
+    $('#button-c').click();
+    lastInteraction = '';
+  });
+
+  $('#button-c').on('click', function() {
+    currentValue = "";
+    $('#results').text(currentValue);
   });
 
 });
