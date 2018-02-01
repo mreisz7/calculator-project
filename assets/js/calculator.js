@@ -120,7 +120,7 @@ $(document).ready(function() {
 
   // Map click events to the operator buttons
   $('.button[data-button-type="operator"]').on('click', function() {
-    if (lastInteraction == 'value' || lastInteraction == 'equals') {
+    if (lastInteraction != '') {
       operator = $(this).find('span').text();
       if (lastInteraction == 'operator') {
         equationArray[equationArray.length - 1] = operator;
