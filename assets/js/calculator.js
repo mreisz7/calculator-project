@@ -127,6 +127,7 @@ $(document).ready(function() {
       } else {
         equationArray.push(currentValue);
         currentValue = '';
+        $('#results').text(currentValue);
         equationArray.push(operator);
       }
       lastInteraction = 'operator';
