@@ -11,10 +11,27 @@ $red-button:      #FF2E00;
   box-sizing: border-box;
 }
 
+html {
+  font-size: 15px;
+}
+
 body {
   font-family: "Arial", sans-serif, monospace;
   background-color: $background;
-  font-size: 15px;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2),
+  (min-resolution: 192dpi) {
+  html {
+    font-size: 30px;
+  }
+}
+
+@media (-webkit-min-device-pixel-ratio: 3),
+  (min-resolution: 300dpi) {
+  html {
+    font-size: 45px;
+  }
 }
 
 #calculator {
@@ -23,9 +40,9 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   height: 42rem;
-  max-height: 98vh;
+  max-height: 90vh;
   width: 25rem;
-  max-width: 98vw;
+  max-width: 95vw;
   background: linear-gradient(to bottom, $calculator, lighten($calculator, 30%), $calculator);
   border-radius: 1rem;
   padding: 2rem 1rem 1rem;
@@ -48,7 +65,7 @@ body {
 
     #results {
       flex: none;
-      font-size: 3em;
+      font-size: 3rem;
       margin: 0;
       overflow-x: auto;
     }
