@@ -137,14 +137,16 @@ $(document).ready(function() {
 
   // Map click events to the equals buttons
   $('#button-equals').on('click', function() {
-    equationArray.push(currentValue);
-    updateEquation(equationArray.join(' ').concat(' ='));
-    currentValue = '';
-    var result = math.eval(equationArray.join(' ').replace('÷', '/').replace('x', '*'));
-    equationArray = [result];
-    currentValue = '';
-    updateResults(result);
-    lastInteraction = 'equals';
+    if (lastInteraction == 'value') {
+      equationArray.push(currentValue);
+      updateEquation(equationArray.join(' ').concat(' ='));
+      currentValue = '';
+      var result = math.eval(equationArray.join(' ').replace('÷', '/').replace('x', '*'));
+      equationArray = [result];
+      currentValue = '';
+      updateResults(result);
+      lastInteraction = 'equals';
+    }
   });
 
   // Map click event to the AC button
