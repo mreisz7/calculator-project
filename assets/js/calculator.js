@@ -24,6 +24,13 @@ $(document).ready(function() {
         case 56:    // * (shift & 8)
           $('#button-multiply').click();
           break;
+        case 173:   // - (keyboard)
+        case 109:   // - (numpad)
+          $('#button-negative').click();
+          break;
+        case 46:
+          $('#button-ac').click();
+          break;
       }
     } else {
       switch(event.keyCode) {
@@ -91,6 +98,15 @@ $(document).ready(function() {
         case 0:     // enter (numpad)
           $('#button-equals').click();
           break;
+        case 46:
+        case 27:
+          $('#button-c').click();
+          break;
+        case 8:
+          backspace();
+          break;
+        default:
+          console.log(event.keyCode);
       };
     }
   });
