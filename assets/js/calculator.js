@@ -183,3 +183,22 @@ function resizeText(element) {
     containingElement.css('font-size', fontSize.toString() + 'px');
   } while (containingElement.width() >= containingElement.parent().width() && fontSize >= 5);
 }
+
+function backspace() {
+  if (currentValue.length > 0 || equationArray.length > 0) {
+    if (lastInteraction == 'value') {
+      if (currentValue.length > 0) {
+        currentValue = currentValue.slice(0, -1);
+      } else {
+        lastInteraction = 'operator';
+        backspace();
+      }
+    } else if (lastInteraction == 'operator') {
+      equationArray.pop();
+      currentValue = equationArray.pop();
+      lastInteraction = 'value';
+    }
+    updateEquation(equationArray.join(' '));
+    updateResults(currentValue);
+  }
+}
