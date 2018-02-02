@@ -24,6 +24,13 @@ $(document).ready(function() {
         case 56:    // * (shift & 8)
           $('#button-multiply').click();
           break;
+        case 173:   // - (keyboard)
+        case 109:   // - (numpad)
+          $('#button-negative').click();
+          break;
+        case 46:
+          $('#button-ac').click();
+          break;
       }
     } else {
       switch(event.keyCode) {
@@ -91,6 +98,15 @@ $(document).ready(function() {
         case 0:     // enter (numpad)
           $('#button-equals').click();
           break;
+        case 46:
+        case 27:
+          $('#button-c').click();
+          break;
+        case 8:
+          backspace();
+          break;
+        default:
+          console.log(event.keyCode);
       };
     }
   });
@@ -100,11 +116,11 @@ $(document).ready(function() {
     var value = $(this).find('span').text()
     if (lastInteraction == 'equals') {
       equationArray = [];
-      $('#equation').text(equationArray.join(' '));
+      updateEquation(equationArray.join(' '));
     }
     lastInteraction = "value";
     currentValue = currentValue.toString().concat(value);
-    $('#results').text(currentValue);
+    updateResults(currentValue);
   });
 
   // Map a click event the negative/positive toggle
@@ -115,7 +131,7 @@ $(document).ready(function() {
     } else {
       currentValue = '-'.concat(currentValue);
     }
-    $('#results').text(currentValue);
+    updateResults(currentValue);
   });
 
   // Map click events to the operator buttons
@@ -127,37 +143,78 @@ $(document).ready(function() {
       } else {
         equationArray.push(currentValue);
         currentValue = '';
-        $('#results').text(currentValue);
+        updateResults(currentValue);
         equationArray.push(operator);
       }
       lastInteraction = 'operator';
-      $('#equation').text(equationArray.join(' '));
+      updateEquation(equationArray.join(' '));
     }
   });
 
   // Map click events to the equals buttons
   $('#button-equals').on('click', function() {
-    equationArray.push(currentValue);
-    $('#equation').text(equationArray.join(' ').concat(' ='));
-    currentValue = '';
-    var result = math.eval(equationArray.join(' ').replace('÷', '/').replace('x', '*'));
-    equationArray = [result];
-    currentValue = '';
-    $('#results').text(result);
-    lastInteraction = 'equals';
+    if (lastInteraction == 'value') {
+      equationArray.push(currentValue);
+      updateEquation(equationArray.join(' ').concat(' ='));
+      currentValue = '';
+      var result = math.eval(equationArray.join(' ').replace('÷', '/').replace('x', '*'));
+      equationArray = [result];
+      currentValue = '';
+      updateResults(result);
+      lastInteraction = 'equals';
+    }
   });
 
   // Map click event to the AC button
   $('#button-ac').on('click', function() {
     equationArray = [];
-    $('#equation').text(equationArray.join(' '));
+    updateEquation(equationArray.join(' '));
     $('#button-c').click();
     lastInteraction = '';
   });
 
   $('#button-c').on('click', function() {
     currentValue = "";
-    $('#results').text(currentValue);
+    updateResults(currentValue);
   });
 
 });
+
+function updateEquation(equation) {
+  $('#equation').text(equation);
+  resizeText('#equation');
+}
+
+function updateResults(value) {
+  $('#results').text(value);
+  resizeText('#results');
+}
+
+function resizeText(element) {
+  var containingElement = $(element);
+  containingElement.css('font-size', '');
+  var fontSize = parseInt(containingElement.css('font-size'));
+  do {
+    fontSize--;
+    containingElement.css('font-size', fontSize.toString() + 'px');
+  } while (containingElement.width() >= containingElement.parent().width() && fontSize >= 5);
+}
+
+function backspace() {
+  if (currentValue.length > 0 || equationArray.length > 0) {
+    if (lastInteraction == 'value') {
+      if (currentValue.length > 0) {
+        currentValue = currentValue.slice(0, -1);
+      } else {
+        lastInteraction = 'operator';
+        backspace();
+      }
+    } else if (lastInteraction == 'operator') {
+      equationArray.pop();
+      currentValue = equationArray.pop();
+      lastInteraction = 'value';
+    }
+    updateEquation(equationArray.join(' '));
+    updateResults(currentValue);
+  }
+}
